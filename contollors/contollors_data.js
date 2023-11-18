@@ -1,17 +1,20 @@
 let { dataofarray } = require("../data/data")
 const { validationResult } = require("express-validator")
-
 const Data = require("../modal/modal_data")
 const HttpStuats = require("../stuats/HttpStuats")
+require("dotenv").config()
+
+const url = process.env.MONGO_URL;
+
 const get_all = async (req, res) => {
     const query = req.query;
 
-    const limit=query.limit || 10;
-    const page=query.page || 1;    
-    const skip = (page-1)*limit;
+    const limit = query.limit || 10;
+    const page = query.page || 1;
+    const skip = (page - 1) * limit;
     // get data fron DB
-    let Data_ofMongo = await Data.find({},{"__v":false}).limit(limit).skip(skip);
-    res.json({ status: HttpStuats.SUCCESS, data: {dataOfBack:Data_ofMongo} })
+    let Data_ofMongo = await Data.find({}, { "__v": false }).limit(limit).skip(skip);
+    res.json({ status: HttpStuats.SUCCESS, data: { dataOfBack: Data_ofMongo } })
 }
 
 const get_single = async (req, res) => {
@@ -53,21 +56,27 @@ const create = async (req, res) => {
             data: errors.array()
         })
     }
-    // const data = Data.push({ id: Data.length + 1, ...req.body })
+    const imageUrl = `/api/data/uploads/${req.file.filename}`;
 
-    // res.status(201).json({
-    //     status: HttpStuats.SUCCESS,
-    //     data: data
-    // })
-
-    // console.log(req.body)
     const newData = new Data(
         {
             name: req.body.name,
             price: req.body.price,
-            avatar: req.file.filename
+            avatar: imageUrl
         }
     );
+    // exports.uploadImage = (req, res) => {
+    //     if (!req.file) {
+    //         return res.status(400).json({ error: 'No file uploaded' });
+    //     }
+
+    //     // File uploaded successfully
+
+    //     // Create a new document in the DataModal collection with the image URL
+    //     DataModal.create({ avatar: imageUrl })
+    //         .then(data => res.json({ imageUrl: imageUrl }))
+    //         .catch(error => res.status(500).json({ error: 'Internal Server Error' }));
+    // };
     await newData.save()
     res.status(201).json({
         status: HttpStuats.SUCCESS,
@@ -75,7 +84,7 @@ const create = async (req, res) => {
     })
 }
 
-const update = async(req, res) => {
+const update = async (req, res) => {
 
     // const id = +req.params.id;
     // // console.log(id);

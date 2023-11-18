@@ -13,17 +13,17 @@ const url =process.env.MONGO_URL;
 
 mongoose.connect(url).then(()=>{
     console.log('connected to db')
+    console.log(process.env.MONGO_URL)
 })
 
 // app.use("/upload",express.static(path.join(__dirname,"Uploads")))
 app.use(express.json()) // for parsing application/json
 app.use(cors()) // for parsing application/json
-app.use("/upload",express.static(path.join(__dirname,"Uploads")))
 
 const router_data=require("./Router/code_router")
  
 app.use("/api/data",router_data) 
- 
+app.use('/api/data/uploads', express.static('uploads'));
 app.all("*",(req,res,next)=>{
     return res.status(404).json({ status: HttpStuats.ERROR, resorse:"NOT FOUND" })
 
