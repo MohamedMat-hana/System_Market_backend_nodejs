@@ -56,7 +56,7 @@ const create = async (req, res) => {
             data: errors.array()
         })
     }
-    const imageUrl = `/api/data/uploads/${req.file.filename}`;
+    const imageUrl = `https://market-app-server.onrender.com/api/data/uploads/${req.file.filename}`;
 
     const newData = new Data(
         {
