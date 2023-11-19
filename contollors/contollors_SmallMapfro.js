@@ -49,9 +49,9 @@ const create = async (req, res) => {
             status: HttpStuats.FAIL,
             data: errors.array()
         })
-        console.log(req.file.filename);
+        // console.log(req.file.filename);
     }
-    const imageUrl = `http://localhost:5000/api/SmallMaphro/upload/${req.file.filename}`;
+    const imageUrl = `https://market-app-server.onrender.com/api/SmallMaphro/upload/${req.file.filename}`;
 
     const newData = new Data(
         {
