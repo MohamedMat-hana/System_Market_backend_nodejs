@@ -12,7 +12,7 @@ const dataModal = new mongoose.Schema(
         },
         avatar:{
             type:String,
-            // default:""
+            required: true
         }
 
 
