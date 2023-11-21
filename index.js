@@ -19,7 +19,7 @@ mongoose.connect(url).then(() => {
     console.log(process.env.MONGO_URL)
 })
 
-// app.use("/upload",express.static(path.join(__dirname,"Uploads")))
+// app.use("/upload",express.static(path.join(__dirname,"uploads")))
 app.use(cors()) // for parsing application/json
 
 const router_data = require("./Router/code_router")
