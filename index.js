@@ -26,13 +26,13 @@ const router_data = require("./Router/code_router")
 
 app.use("/api/data", router_data)
 
-// const SmallMaphro_router = require("./Router/SmallMaphro_router")
+const SmallMaphro_router = require("./Router/SmallMaphro_router")
 
-// app.use("/api/SmallMaphro", SmallMaphro_router)
+app.use("/api/SmallMaphro", SmallMaphro_router)
 
 
 app.use('/api/data/uploads', express.static('uploads'));
-// app.use('/api/SmallMaphro/upload', express.static('upload'));
+app.use('/api/SmallMaphro/upload', express.static('upload'));
 
 app.all("*", (req, res, next) => {
     return res.status(404).json({ status: HttpStuats.ERROR, resorse: "NOT FOUND" })
