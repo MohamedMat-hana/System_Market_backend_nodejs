@@ -65,7 +65,7 @@ const create = asyncWrapper(async (req, res ) => {
         })
     }
     
-    const imageUrl = `https://system-market-backend-nodejs-womc.vercel.app/api/data/uploads/${req.file.filename}`;
+    const imageUrl = `https://market-app-server.onrender.com/api/data/uploads/${req.file.filename}`;
 
      const newData = await new Data(
         {
