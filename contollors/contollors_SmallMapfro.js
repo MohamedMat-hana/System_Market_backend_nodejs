@@ -53,7 +53,7 @@ const create = async (req, res) => {
     }     
     //    console.log(req.file.filename);
 
-    const imageUrl = `https://market-app-server.onrender.com/api/SmallMaphro/upload/${req.file.filename}`;
+    const imageUrl = `https://system-market-backend-nodejs-womc.vercel.app/api/SmallMaphro/upload/${req.file.filename}`;
 
     const newData = new Data(
         {
