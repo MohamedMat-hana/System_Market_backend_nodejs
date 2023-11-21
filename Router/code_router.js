@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
       cb(null, 'uploads/'); // Destination folder for uploaded files
     },
     filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname); // File naming convention
+     return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`); // File naming convention
     },
   });
   
@@ -23,6 +23,7 @@ const storage = multer.diskStorage({
   router.route("/")
     .get(controller.get_all)
     .post(upload.single('avatar'),
+    
         validationSchema(),
         controller.create)
 

@@ -2,11 +2,17 @@ let { dataofarray } = require("../data/data")
 const { validationResult } = require("express-validator")
 const Data = require("../modal/modal_data")
 const HttpStuats = require("../stuats/HttpStuats")
+const asyncWrapper = require("../MiddleWear/asyncWrapper");
+
 require("dotenv").config()
+const multer = require('multer')
+const path = require("path")
 
 const url = process.env.MONGO_URL;
 
 const get_all = async (req, res) => {
+    // console.log(req.body);
+
     const query = req.query;
 
     const limit = query.limit || 10;
@@ -46,7 +52,9 @@ const get_single = async (req, res) => {
 
 }
 
-const create = async (req, res) => {
+const create = asyncWrapper(async (req, res ) => {
+    // console.log(req.body);
+    console.log(req.headers);
     console.log(req.file);
 
     const errors = validationResult(req);
@@ -56,33 +64,22 @@ const create = async (req, res) => {
             data: errors.array()
         })
     }
+    
     const imageUrl = `https://market-app-server.onrender.com/api/data/uploads/${req.file.filename}`;
 
-    const newData = new Data(
+     const newData = await new Data(
         {
             name: req.body.name,
             price: req.body.price,
-            avatar: imageUrl
+            avatar: imageUrl 
         }
     );
-    // exports.uploadImage = (req, res) => {
-    //     if (!req.file) {
-    //         return res.status(400).json({ error: 'No file uploaded' });
-    //     }
-
-    //     // File uploaded successfully
-
-    //     // Create a new document in the DataModal collection with the image URL
-    //     DataModal.create({ avatar: imageUrl })
-    //         .then(data => res.json({ imageUrl: imageUrl }))
-    //         .catch(error => res.status(500).json({ error: 'Internal Server Error' }));
-    // };
-    await newData.save()
+     await newData.save()
     res.status(201).json({
         status: HttpStuats.SUCCESS,
         data: newData
     })
-}
+})
 
 const update = async (req, res) => {
 
