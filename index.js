@@ -36,11 +36,17 @@ const BigFoat = require("./Router/BigFoat_router")
 
 app.use("/api/BigFoat", BigFoat)
 
+const SmallFoat = require("./Router/SmallFoat_router")
+
+app.use("/api/SmallFoat", SmallFoat)
+
 
 app.use('/api/data/uploads', express.static('uploads'));
 app.use('/api/SmallMaphro/upload', express.static('upload'));
 app.use('/api/BigFoat/upload', express.static('upload'));
+app.use('/api/SmallFoat/upload', express.static('upload'));
 
+// SmallFoat
 app.all("*", (req, res, next) => {
     return res.status(404).json({ status: HttpStuats.ERROR, resorse: "NOT FOUND" })
 
