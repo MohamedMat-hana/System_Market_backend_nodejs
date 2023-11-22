@@ -7,6 +7,8 @@ const multer = require('multer')
 const controller = require("../contollors/contollors_SmallFoat")
 const path = require("path")
 const validationSchema = require("../MiddleWear/validationSchema");
+const userRols = require("../stuats/userRols");
+const allowTo = require("../MiddleWear/allowTo");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -22,14 +24,16 @@ const storage = multer.diskStorage({
    router.route("/")
     .get(controller.get_all)
     .post(upload.single('avatar'),
-    
+    allowTo(userRols.ADMIN, userRols.MANGER),
         validationSchema(),
         controller.create)
 
 router.route("/:id")
     .get(controller.get_single)
-    .patch(controller.update)
-    .delete(
+    .patch(    allowTo(userRols.ADMIN, userRols.MANGER),
+    controller.update)
+    .delete(    allowTo(userRols.ADMIN, userRols.MANGER),
+
         controller.delete_one)
 
 

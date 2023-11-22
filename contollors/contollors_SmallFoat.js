@@ -44,9 +44,9 @@ const get_single = async (req, res) => {
 }
 
 const create = asyncWrapper(async (req, res) => {
-    // console.log(req.body);
+    console.log(req.body);
     console.log(req.headers);
-    console.log(req.file);
+    console.log(res.file);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

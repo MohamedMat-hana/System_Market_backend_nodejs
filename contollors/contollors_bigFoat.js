@@ -8,6 +8,9 @@ require("dotenv").config()
 const url = process.env.MONGO_URL;
 
 const get_all = async (req, res) => {
+    console.log("req==",req.body);
+    console.log("req==",req.headers);
+    console.log("req==",req.file);
 
     const query = req.query;
 
@@ -44,9 +47,9 @@ const get_single = async (req, res) => {
 }
 
 const create = asyncWrapper(async (req, res) => {
-    // console.log(req.body);
-    console.log(req.headers);
-    console.log(req.file);
+    console.log("req==",req.body);
+    console.log("req==",req.headers);
+    console.log("req==",req.file);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

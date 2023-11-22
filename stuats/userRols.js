@@ -4,4 +4,5 @@ const userRols={
     MANGER:'manger'        
 }
 
+
 module.exports=userRols;
