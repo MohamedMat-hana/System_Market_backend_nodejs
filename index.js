@@ -19,7 +19,9 @@ mongoose.connect(url).then(() => {
     console.log(process.env.MONGO_URL)
 })
 
-app.use("/upload",express.static(path.join(__dirname,"uploads")))
+// Serve static files from the 'uploads' folder
+
+app.use("/upload", express.static(path.join(__dirname, "uploads")))
 app.use(cors()) // for parsing application/json
 
 const router_data = require("./Router/code_router")
@@ -30,9 +32,14 @@ const SmallMaphro_router = require("./Router/SmallMaphro_router")
 
 app.use("/api/SmallMaphro", SmallMaphro_router)
 
+const BigFoat = require("./Router/BigFoat_router")
+
+app.use("/api/BigFoat", BigFoat)
+
 
 app.use('/api/data/uploads', express.static('uploads'));
 app.use('/api/SmallMaphro/upload', express.static('upload'));
+app.use('/api/BigFoat/upload', express.static('upload'));
 
 app.all("*", (req, res, next) => {
     return res.status(404).json({ status: HttpStuats.ERROR, resorse: "NOT FOUND" })
