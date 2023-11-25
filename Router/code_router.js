@@ -27,8 +27,7 @@ router.route("/")
   .get(controller.get_all)
   .post(
      upload.single('avatar'),
-    allowedTo(userRols.ADMIN, userRols.MANGER),
-
+ 
     validationSchema(),
     controller.create)
 
@@ -36,13 +35,11 @@ router.route("/:id")
   .get(controller.get_single)
   .patch(
     
-    allowedTo(userRols.ADMIN, userRols.MANGER),
-    controller.update)
+     controller.update)
   .delete(
     
 
-    allowedTo(userRols.ADMIN, userRols.MANGER),
-
+ 
     controller.delete_one)
 
 
