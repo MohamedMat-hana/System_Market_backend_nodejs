@@ -26,7 +26,7 @@ const upload = multer({ storage: storage });
 router.route("/")
   .get(controller.get_all)
   .post(
-     upload.single('avatar'),
+    //  upload.single('avatar'),
  
     validationSchema(),
     controller.create)
