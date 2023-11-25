@@ -26,8 +26,7 @@ const upload = multer({ storage: storage });
 router.route("/")
   .get(controller.get_all)
   .post(
-    verfiyToken,
-    upload.single('avatar'),
+     upload.single('avatar'),
     allowedTo(userRols.ADMIN, userRols.MANGER),
 
     validationSchema(),
@@ -36,11 +35,11 @@ router.route("/")
 router.route("/:id")
   .get(controller.get_single)
   .patch(
-    verfiyToken,
+    
     allowedTo(userRols.ADMIN, userRols.MANGER),
     controller.update)
   .delete(
-    verfiyToken,
+    
 
     allowedTo(userRols.ADMIN, userRols.MANGER),
 

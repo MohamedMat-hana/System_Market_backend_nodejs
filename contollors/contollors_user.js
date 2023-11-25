@@ -87,7 +87,7 @@ const login = asyncWrapper(async (req, res, next) => {
         const error = appError.create('Please provide password', 400, HttpStuats.FAIL)
         return next(error);
     }
-    const User = await user.findOne({ email: email })
+    const User = await user.findOne({ email: email,password:password })
     if (!User) {
         const error = appError.create('user is not exist', 400, HttpStuats.FAIL)
         return next(error);
