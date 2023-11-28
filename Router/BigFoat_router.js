@@ -23,24 +23,17 @@ const upload = multer({ storage: storage });
 
 router.route("/")
   .get(controller.get_all)
-  .post(
-    verfiyToken,
-
+  .post( 
     upload.single('avatar'),
-    allowedTo(userRols.ADMIN, userRols.MANGER),
-    validationSchema(),
+     validationSchema(),
     controller.create)
 
 router.route("/:id")
   .get(controller.get_single)
   .patch(
-    verfiyToken,
-    allowedTo(userRols.ADMIN, userRols.MANGER),
-    controller.update)
+     controller.update)
   .delete(
-    verfiyToken,
-    allowedTo(userRols.ADMIN, userRols.MANGER),
-    controller.delete_one)
+     controller.delete_one)
 
 
 module.exports = router;

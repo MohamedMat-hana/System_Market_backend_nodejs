@@ -55,26 +55,14 @@ const create = async (req, res) => {
 
     const imageUrl = `https://market-app-server.onrender.com/api/SmallMaphro/upload/${req.file.filename}`;
 
-    const newData = new Data(
+    const newData = await new Data(
         {
             name: req.body.name,
             price: req.body.price,
             avatar: imageUrl
         }
     );
-    // exports.uploadImage = (req, res) => {
-    //     if (!req.file) {
-    //         return res.status(400).json({ error: 'No file uploaded' });
-    //     }
-
-    //     // File uploaded successfully
-
-    //     // Create a new document in the DataModal collection with the image URL
-    //     DataModal.create({ avatar: imageUrl })
-    //         .then(data => res.json({ imageUrl: imageUrl }))
-    //         .catch(error => res.status(500).json({ error: 'Internal Server Error' }));
-    // };
-    await newData.save()
+     await newData.save()
     res.status(201).json({
         status: HttpStuats.SUCCESS,
         data: newData

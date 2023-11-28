@@ -26,22 +26,15 @@ router.route("/")
   .get(controller.get_all)
   .post(
     upload.single('avatar'),
-    verfiyToken,
-    allowTo(userRols.MANGER),
-    validationSchema(),
+     validationSchema(),
     controller.create)
 
 router.route("/:id")
   .get(controller.get_single)
   .patch(
-    verfiyToken,
-    allowTo(userRols.ADMIN, userRols.MANGER),
-    controller.update)
+     controller.update)
   .delete(
-    verfiyToken,
-    allowTo(userRols.ADMIN, userRols.MANGER),
-
-    controller.delete_one)
+     controller.delete_one)
 
 
 module.exports = router;

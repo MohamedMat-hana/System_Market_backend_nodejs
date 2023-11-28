@@ -7,10 +7,7 @@ const multer = require('multer')
 const controller = require("../contollors/contollors_SmallMapfro")
 const path = require("path")
 const validationSchema = require("../MiddleWear/validationSchema");
-const allowTo = require("../MiddleWear/allowTo");
-const userRols = require("../stuats/userRols");
-const verfiyToken = require("../MiddleWear/verfiyToken");
-
+ 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'upload/'); // Destination folder for uploaded files
@@ -27,7 +24,6 @@ router.route("/")
   .get(controller.get_all)
   .post(
     upload.single('avatar'),
- 
      validationSchema(),
     controller.create)
 

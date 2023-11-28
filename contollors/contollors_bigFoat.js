@@ -61,7 +61,7 @@ const create = asyncWrapper(async (req, res) => {
 
     const imageUrl = `https://market-app-server.onrender.com/api/BigFoat/upload/${req.file.filename}`;
 
-    const newData = await new Data(
+    const newData =  await new Data(
         {
             name: req.body.name,
             price: req.body.price,
